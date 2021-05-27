@@ -3,7 +3,7 @@
 The `point_pillars` pip package can be installed with:
  
 ```bash
-pip install git+https://gitlab.ika.rwth-aachen.de/automated-driving/pointpillars.git
+pip install git+https://github.com/ika-rwth-aachen/PointPillars.git
 ```
 
 # About Point Pillars
