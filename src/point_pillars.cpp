@@ -37,7 +37,7 @@ pybind11::tuple createPillars(pybind11::array_t<float> points,
                               int maxPointsPerPillar, int maxPillars,
                               float xStep, float yStep, float xMin, float xMax,
                               float yMin, float yMax, float zMin, float zMax,
-                              bool printTime = false) {
+                              bool printTime = false, float minDistance = -1.0) {
   std::chrono::high_resolution_clock::time_point t1 =
       std::chrono::high_resolution_clock::now();
 
@@ -54,7 +54,9 @@ pybind11::tuple createPillars(pybind11::array_t<float> points,
   for (int i = 0; i < points.shape()[0]; ++i) {
     if ((points.at(i, 0) < xMin) || (points.at(i, 0) >= xMax) ||
         (points.at(i, 1) < yMin) || (points.at(i, 1) >= yMax) ||
-        (points.at(i, 2) < zMin) || (points.at(i, 2) >= zMax)) {
+        (points.at(i, 2) < zMin) || (points.at(i, 2) >= zMax) ||
+        minDistance > 0 && (std::pow(points.at(i, 0), 2) + std::pow(points.at(i, 1), 2)) < std::pow(minDistance, 2)) 
+    {
       continue;
     }
 
