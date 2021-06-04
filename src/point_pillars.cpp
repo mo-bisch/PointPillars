@@ -37,7 +37,7 @@ pybind11::tuple createPillars(pybind11::array_t<float> points,
                               int maxPointsPerPillar, int maxPillars,
                               float xStep, float yStep, float xMin, float xMax,
                               float yMin, float yMax, float zMin, float zMax,
-                              bool printTime = false, float minDistance = -1.0) {
+                              bool printTime, float minDistance) {
   std::chrono::high_resolution_clock::time_point t1 =
       std::chrono::high_resolution_clock::now();
 
@@ -634,7 +634,11 @@ pybind11::array_t<float> createPillarsTarget(
 
 PYBIND11_MODULE(point_pillars, m) {
   m.def("createPillars", &createPillars,
-        "Runs function to create point pillars input tensors");
+        "Runs function to create point pillars input tensors",
+        pybind11::arg("points"), pybind11::arg("maxPointsPerPillar"), pybind11::arg("maxPillars"),
+        pybind11::arg("xStep"), pybind11::arg("yStep"), pybind11::arg("xMin"), pybind11::arg("xMax"),
+        pybind11::arg("yMin"), pybind11::arg("yMax"), pybind11::arg("zMin"), pybind11::arg("zMax"),
+        pybind11::arg("printTime") = false, pybind11::arg("minDistance") = -1.0);
   m.def("createPillarsTarget", &createPillarsTarget,
         "Runs function to create point pillars output ground truth");
 }
