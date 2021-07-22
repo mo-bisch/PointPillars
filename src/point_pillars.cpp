@@ -61,8 +61,6 @@ pybind11::tuple createPillars(pybind11::array_t<float> points,
   std::chrono::high_resolution_clock::time_point t1 =
       std::chrono::high_resolution_clock::now();
 
-  std::cout << points.shape()[1] << std::endl;
-
   if (points.shape()[1] == 4)
   {
 
